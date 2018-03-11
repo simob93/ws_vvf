@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection properties - Driver, URL, user, password -->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://127.0.0.1:3306/db_vvfriva?autoReconnect=true</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
+        <property name="hibernate.connection.password">root</property>
+        <!-- Connection Pool Size -->
+        <property name="hibernate.connection.pool_size">10</property>
+         
+        <!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!-- Outputs the SQL queries, should be disabled in Production -->
+        <property name="show_sql">true</property>
+        
+    
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+         
+         
+   	  
+        <!-- mapping file, we can use Bean annotations too -->
+         <mapping class="vvfriva.entity.Vigili" />
+         <mapping class="vvfriva.entity.Squadre" />
+         <mapping class="vvfriva.entity.Ente" />
+         <mapping class="vvfriva.entity.Faldone" />
+         <mapping class="vvfriva.entity.Protocolli" />
+         <mapping class="vvfriva.entity.Comune" />
+         <mapping class="vvfriva.entity.Province" />
+          <mapping class="vvfriva.entity.Rubrica" />
+          <mapping class="vvfriva.entity.Strade" />
+          <mapping class="vvfriva.entity.Password" />
+          <mapping class="vvfriva.entity.Coordinate" />
+    
+       
+
+    </session-factory>
+</hibernate-configuration>
