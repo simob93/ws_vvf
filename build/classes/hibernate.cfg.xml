@@ -10,14 +10,16 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.zeroDateTimeBehavior">convertToNull</property>
         <property name="hibernate.connection.password">root</property>
-        <!-- Connection Pool Size -->
-        <property name="hibernate.connection.pool_size">10</property>
-         
+        <!-- Connection Pool Size -->         
         <!-- org.hibernate.HibernateException: No CurrentSessionContext configured! -->
         <property name="hibernate.current_session_context_class">thread</property>
         <!-- Outputs the SQL queries, should be disabled in Production -->
         <property name="show_sql">true</property>
-        
+        <property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.timeout">300</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
+		<property name="hibernate.c3p0.idle_test_period">3000</property>
     
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
          

@@ -33,7 +33,7 @@ public class ProtocolliManager extends StdManager<Protocolli> {
 			if (!Controlli.isEmptyString(oggetto)) {
 				query.add(Restrictions.like("oggetto", "%" + oggetto + "%"));
 			}
-			query.addOrder(Order.desc("data"));
+			query.addOrder(Order.desc("id"));
 			
 			data = query.list();
 						
