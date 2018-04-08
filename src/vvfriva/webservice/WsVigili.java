@@ -1,8 +1,6 @@
 package vvfriva.webservice;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -14,11 +12,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import sun.java2d.pipe.SpanShapeRenderer.Simple;
 import vvfriva.entity.Vigili;
 import vvfriva.model.CustomJsonResponse;
 import vvfriva.model.KeyValue;
-import vvfriva.model.ModelTurni;
 import vvfriva.model.Report;
 import vvfriva.service.VigiliService;
 

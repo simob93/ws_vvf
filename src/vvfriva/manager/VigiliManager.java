@@ -11,12 +11,16 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.AliasToBeanResultTransformer;
+import org.hibernate.transform.ResultTransformer;
 
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import vvfriva.entity.Rubrica;
 import vvfriva.entity.Squadre;
 import vvfriva.entity.Vigili;
 import vvfriva.model.KeyValue;
@@ -489,6 +493,38 @@ public class VigiliManager extends StdManager<Vigili> {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		return data;
+	}	
+	/**
+	 * metodo per l'estrapolazione dei compleanni 
+	 * relativi ai vigili
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Vigili> checkbirthday() {
+		Transaction tx = null;
+		Session session = null;
+		List<Vigili> data = null;
+		try {
+			session = HibernateUtils.getSessionAnnotationFactory().openSession();
+			tx = session.beginTransaction();
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT nome as nome, cognome as cognome, datadinascita as dataNascita ")
+			  .append("FROM vigile ")
+			  .append("WHERE MONTH(datadinascita)=MONTH(CURDATE()) AND DAY(datadinascita)=DAY(CURDATE())");
+			
+			data = session.createSQLQuery(sb.toString())
+				.setResultTransformer(new AliasToBeanResultTransformer(Vigili.class)).list();
+						
+		
+		} catch (Exception e) {
+			logger.error("exception in function: checkbirthday " + e.getMessage());
+			e.printStackTrace();
+			if (tx != null) tx.rollback();
+		} finally {
+			if (session != null) session.close();
 		}
 		return data;
 	}

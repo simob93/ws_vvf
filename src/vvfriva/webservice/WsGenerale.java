@@ -14,9 +14,11 @@ import org.hibernate.Transaction;
 
 import vvfriva.entity.Comune;
 import vvfriva.entity.Province;
+import vvfriva.entity.Vigili;
 import vvfriva.model.CustomJsonResponse;
 import vvfriva.service.ComuniService;
 import vvfriva.service.ProvinceService;
+import vvfriva.service.VigiliService;
 import vvfriva.utils.Costanti;
 
 @Path("/general")
@@ -26,6 +28,7 @@ public class WsGenerale {
 	 */
 	public ProvinceService provinceSrvice = null;
 	public ComuniService comuniService = null;
+	public VigiliService vigiliService = null;
 	
 	public WsGenerale() {
 		if (provinceSrvice == null) {
@@ -33,6 +36,9 @@ public class WsGenerale {
 		}
 		if (comuniService == null) {
 			comuniService = new ComuniService();
+		}
+		if (vigiliService == null) {
+			vigiliService = new VigiliService();
 		}
 	}
 	
@@ -48,6 +54,13 @@ public class WsGenerale {
 	@Produces(MediaType.APPLICATION_JSON)
 	public CustomJsonResponse<List<Comune>> getComuni() {
 		return comuniService.list();
+	}
+	
+	@GET
+	@Path("checkbirthdays")
+	@Produces(MediaType.APPLICATION_JSON)
+	public CustomJsonResponse<List<Vigili>> checkbirthday() {
+		return vigiliService.checkbirthday();
 	}
 	
 	@GET

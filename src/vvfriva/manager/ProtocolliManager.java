@@ -36,6 +36,7 @@ public class ProtocolliManager extends StdManager<Protocolli> {
 			query.addOrder(Order.desc("id"));
 			
 			data = query.list();
+			tx.commit();
 						
 			
 		} catch (Exception e) {

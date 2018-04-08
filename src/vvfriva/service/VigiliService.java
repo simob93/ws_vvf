@@ -188,5 +188,25 @@ public class VigiliService {
 		}
  		return response;
 	}
+	public CustomJsonResponse<List<Vigili>> checkbirthday() {
+		boolean success = true;
+		List<String> messaggi = new ArrayList<String>();
+		List<Vigili> data = null;
+		CustomJsonResponse<List<Vigili>> response = null;
+		
+		try {
+			
+			data = this.getManager().checkbirthday();
+			messaggi.add(new StringBuilder().append(Costanti.OPERAZIONE_OK).toString());
+			
+		} catch (Exception e) {
+			success = false;
+			e.printStackTrace();
+			messaggi.add(new StringBuilder().append(Costanti.OPERAZIONE_KO).append(e.getMessage()).toString());
+		} finally {
+			response = new CustomJsonResponse<List<Vigili>>(success, messaggi, data);
+		}
+ 		return response;
+	}
 	
 }
